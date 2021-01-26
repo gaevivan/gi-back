@@ -1,0 +1,37 @@
+{
+  "name": "gi-back",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon index.js"
+  },
+  "engines": {
+    "node": "10"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gaevivan/gi-back.git"
+  },
+  "keywords": [
+    "backend"
+  ],
+  "type": "module",
+  "author": "gaevivan",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/gaevivan/gi-back/issues"
+  },
+  "homepage": "https://github.com/gaevivan/gi-back#readme",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "mongodb": "^3.6.3",
+    "uuid": "^8.3.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.7",
+    "prettier": "^2.1.1"
+  }
+}

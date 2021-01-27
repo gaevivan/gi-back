@@ -1,0 +1,14 @@
+<div class="sign-in-form">
+  <div class="sign-in-form__item">
+    <label class="item__label"> Логин</label>
+    <input [title]="loginControl.errors | errorsMessage"  type="text" [formControl]="loginControl" />
+  </div>
+
+  <div class="sign-in-form__item">
+    <label class="item__label"> Пароль</label>
+    <input [title]="passwordControl.errors | errorsMessage"  type="password" [formControl]="passwordControl" />
+  </div>
+
+  <button class="sign-in-form__sign-in-button" type="button" [disabled]="!authControl.valid" (click)="signIn()">Вход</button>
+  <a class="sign-in-form__sign-up-button" [routerLink]="'/sign-up'" type="button">К регистрации</a>
+</div>

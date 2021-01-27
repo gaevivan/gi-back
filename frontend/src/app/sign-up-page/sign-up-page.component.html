@@ -1,0 +1,19 @@
+<div class="sign-up-form">
+  <div class="sign-up-form__item">
+    <label class="item__label"> Логин</label>
+    <input [title]="loginControl.errors | errorsMessage" type="text" [formControl]="loginControl" />
+  </div>
+
+  <div class="sign-up-form__item">
+    <label class="item__label"> Пароль</label>
+    <input [title]="passwordControl.errors | errorsMessage" type="password" [formControl]="passwordControl" />
+  </div>
+
+  <div class="sign-up-form__item">
+    <label class="item__label"> Подтверждение пароля</label>
+    <input [title]="verifiedPasswordControl.errors | errorsMessage" type="password" [formControl]="verifiedPasswordControl" />
+  </div>
+
+  <button class="sign-up-form__sign-up-button" type="button" [disabled]="!authControl.valid" (click)="signUp()">Зарегистрироваться</button>
+  <a class="sign-up-form__sign-in-button" [routerLink]="'/sign-in'" type="button">К авторизации</a>
+</div>

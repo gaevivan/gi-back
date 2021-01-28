@@ -9,6 +9,7 @@ import { SignInPageModule } from './sign-in-page/sign-in-page.module';
 import { SignUpPageModule } from './sign-up-page/sign-up-page.module';
 import { ExamplePageModule } from './example-page/example-page.module';
 import { SharedModule } from '@shared/shared.module';
+import { CurrentAppState } from '@shared/stores/current-app/current-app.state';
 
 @NgModule({
   declarations: [AppComponent],
@@ -19,7 +20,7 @@ import { SharedModule } from '@shared/shared.module';
     SignUpPageModule,
     ExamplePageModule,
     SharedModule,
-    NgxsModule.forRoot([CurrentUserState]),
+    NgxsModule.forRoot([CurrentUserState, CurrentAppState])
   ],
   providers: [],
   bootstrap: [AppComponent],

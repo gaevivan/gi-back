@@ -1,5 +1,6 @@
 import getEqualFilter from '../functions/get-equal-filter.function.js';
 import Storage from './storage.class.js';
+import isEmpty from '../functions/is-empty.function.js';
 
 export default class Api {
   constructor(client) {
@@ -34,9 +35,9 @@ export default class Api {
       if (!password) {
         return response.status(400).send('Необходимо поле: password');
       }
-      await this.storage.create('users', { login, password });
-      const result = await this.storage.create('tokens', { login });
-      return response.status(200).send(result.id);
+      const user = await this.storage.create('users', [{ login, password }]);
+      const result = await this.storage.create('tokens', [{ login }]);
+      return response.status(200).send({token: result.id, ...user});
     } catch (error) {
       console.log(`signIn error`, error);
       return response.status(500).send(error);
@@ -54,7 +55,7 @@ export default class Api {
         return response.status(400).send('Нет пользователя с таким кодом авторизации');
       }
       const signedOutItem = tokens[0];
-      return response.status(200).send(signedOutItem.login);
+      return response.status(200).send({login: signedOutItem.login});
     } catch (error) {
       console.log(`signIn error`, error);
       return response.status(500).send(error);
@@ -82,8 +83,8 @@ export default class Api {
       if (isEmpty(usersWithValidPassword)) {
         return response.status(400).send('Неправильный пароль');
       }
-      const result = await this.storage.create('tokens', { login });
-      return response.status(200).send(result.id);
+      const result = await this.storage.create('tokens', [{ login }]);
+      return response.status(200).send({token: result.id, ...usersWithValidPassword[0]});
     } catch (error) {
       console.log(`signIn error`, error);
       return response.status(500).send(error);

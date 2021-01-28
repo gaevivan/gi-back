@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Store } from '@ngxs/store';
+import { CurrentAppActions } from '@shared/stores/current-app/current-app.actions';
+import { CurrentUserActions } from '@shared/stores/current-user/current-user.actions';
 
 @Component({
   selector: 'app-sign-in-page',
@@ -12,7 +15,7 @@ export class SignInPageComponent {
   public readonly passwordControl: FormControl = new FormControl('', [Validators.minLength(6), Validators.required]);
   public readonly authControl: FormGroup = this.getDefaultForm();
 
-  constructor() {
+  constructor(private readonly store: Store) {
     this.authControl = this.getDefaultForm();
   }
 
@@ -25,7 +28,7 @@ export class SignInPageComponent {
   }
 
   public signIn(): void {
-    console.log(this.authControl.value);
+    this.store.dispatch(new CurrentUserActions.SignIn(this.authControl.value));
   }
 
 }

@@ -1,5 +1,6 @@
 import { Pipe, PipeTransform } from '@angular/core';
 import { ValidationErrors } from '@angular/forms';
+import { Errors } from '@shared/enums/errors.enum';
 import { isEmpty } from '@shared/functions/is-empty.function';
 import { isNil } from '@shared/functions/is-nil.function';
 
@@ -14,25 +15,11 @@ export class ErrorsMessagePipe implements PipeTransform {
       return null;
     }
     const errorsMessageList: string[] = errorKeys.map((key: string) =>
-      getValidationError(key)
+      Errors[key] ?? null
     );
     const validErrors: string[] = errorsMessageList.filter(
       (value: string) => !isNil(value)
     );
     return `${validErrors.join(';\n')}.`;
   }
-}
-
-const ERROR_MAP: Map<string, string> = new Map([
-  [
-    'wrongVerificationPassword',
-    'Пароль подтверждения не совпадает с оригинальным паролем',
-  ],
-  ['minlength', 'Значение слишком короткое'],
-  ['required', 'Поле является обязательным'],
-]);
-
-export function getValidationError(key: string): string {
-  const value: string = ERROR_MAP.get(key);
-  return value ?? null;
 }

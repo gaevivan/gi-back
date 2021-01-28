@@ -22,6 +22,9 @@ export default class Storage {
   async create(
     entity, data
   ) {
+    if (!Array.isArray(data)) {
+      data = [data];
+    }
     const dataWithIds = data.map((dataItem) => {
       const withoutValidUuid = !dataItem.id || !isUuidV4(dataItem.id);
       if (withoutValidUuid) {

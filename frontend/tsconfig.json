@@ -18,7 +18,7 @@
     ],
     "paths": {
       "@angular/*": ["./node_modules/@angular/*"],
-      "@shared/*": ["./src/app/shared/*"],
+      "@shared/*": ["./src/app/@shared/*"],
     },
   }
 }

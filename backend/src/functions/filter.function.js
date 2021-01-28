@@ -10,9 +10,9 @@ function filterOne(dataItem, filterItem) {
     return true;
   }
   if (filterItem.length > 2 && filterItem[1] === AND_OPERATOR) {
-    return filter(dataItem, filterItem[0]) && filter(dataItem, filterItem[2]);
+    return filterOne(dataItem, filterItem[0]) && filterOne(dataItem, filterItem[2]);
   } else if (filterItem.length > 2 && filterItem[1] === OR_OPERATOR) {
-    return filter(dataItem, filterItem[0]) || filter(dataItem, filterItem[2])
+    return filterOne(dataItem, filterItem[0]) || filterOne(dataItem, filterItem[2])
   } else {
     return compare(dataItem, filterItem);
   }

@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { Store } from '@ngxs/store';
 import { App } from '@shared/interfaces/app.interface';
-import { filterNil } from '@shared/rxjs-operators/filter-not-nil.operator';
 import { CurrentAppState } from '@shared/stores/current-app/current-app.state';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';

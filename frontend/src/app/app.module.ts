@@ -10,6 +10,8 @@ import { SignUpPageModule } from './sign-up-page/sign-up-page.module';
 import { ExamplePageModule } from './example-page/example-page.module';
 import { SharedModule } from '@shared/shared.module';
 import { CurrentAppState } from '@shared/stores/current-app/current-app.state';
+import { CurrentUserTokenState } from '@shared/stores/current-user-token/current-user-token.state';
+import { NgxsStoragePluginModule } from '@ngxs/storage-plugin';
 
 @NgModule({
   declarations: [AppComponent],
@@ -20,7 +22,14 @@ import { CurrentAppState } from '@shared/stores/current-app/current-app.state';
     SignUpPageModule,
     ExamplePageModule,
     SharedModule,
-    NgxsModule.forRoot([CurrentUserState, CurrentAppState])
+    NgxsModule.forRoot([
+      CurrentUserState,
+      CurrentAppState,
+      CurrentUserTokenState,
+    ]),
+    NgxsStoragePluginModule.forRoot({
+      key: [CurrentUserTokenState],
+    }),
   ],
   providers: [],
   bootstrap: [AppComponent],

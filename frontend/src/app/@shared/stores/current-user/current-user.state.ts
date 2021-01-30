@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Action, createSelector, State, StateContext } from '@ngxs/store';
+import { Action, State, StateContext } from '@ngxs/store';
 import { VOID } from '@shared/constants/void.constant';
 import { UserWithToken } from '@shared/interfaces/user-with-token.interface';
 import { AuthRequests } from '@shared/requests/auth.requests';
@@ -58,13 +58,5 @@ export class CurrentUserState {
     return this.authRequests
       .signOut(token)
       .pipe(tap(() => context.setState(null)));
-  }
-
-  public static getCurrentUser(): (
-    currentUser: UserWithToken
-  ) => UserWithToken {
-    return createSelector([CurrentUserState], (currentUser: UserWithToken) => {
-      return currentUser;
-    });
   }
 }

@@ -16,7 +16,7 @@ import { map, take } from 'rxjs/operators';
 @Injectable({ providedIn: 'root' })
 export class CanActiveService implements CanActivate {
   private readonly currentUser$: Observable<UserWithToken> = this.store.select(
-    CurrentUserState.getCurrentUser()
+    CurrentUserState
   );
 
   constructor(private readonly store: Store, private router: Router) {}

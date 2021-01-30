@@ -10,5 +10,5 @@
   </div>
 
   <button class="sign-in-form__sign-in-button" type="button" [disabled]="!authControl.valid" (click)="signIn()">Вход</button>
-  <a class="sign-in-form__sign-up-button" [routerLink]="'/sign-up'" type="button">К регистрации</a>
+  <a class="sign-in-form__sign-up-link" routerLink="/sign-up" type="button">К регистрации</a>
 </div>

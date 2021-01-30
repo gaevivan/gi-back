@@ -9,20 +9,16 @@ import { map } from 'rxjs/operators';
 @Component({
   selector: 'app-credentials-footer',
   templateUrl: './credentials-footer.component.html',
-  styleUrls: ['./credentials-footer.component.scss']
+  styleUrls: ['./credentials-footer.component.scss'],
 })
 export class CredentialsFooterComponent {
-
   public readonly currentAppTitle$: Observable<string> = this.getCurrentTitle();
 
-  constructor(
-    private readonly store: Store
-  ) { }
+  constructor(private readonly store: Store) {}
 
   private getCurrentTitle(): Observable<string> {
-    return this.store.select(CurrentAppState.getCurrentApp()).pipe(
-      map((currentApp: App) => currentApp?.title ?? null),
-    );
+    return this.store
+      .select(CurrentAppState)
+      .pipe(map((currentApp: App) => currentApp?.title ?? null));
   }
-
 }

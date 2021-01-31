@@ -5,6 +5,7 @@ import { UserWithToken } from '@shared/interfaces/user-with-token.interface';
 import { AuthRequests } from '@shared/requests/auth.requests';
 import { Observable, of } from 'rxjs';
 import { mapTo, tap } from 'rxjs/operators';
+import { CurrentUserTokenActions } from '../current-user-token/current-user-token.actions';
 import { CurrentUserActions } from './current-user.actions';
 
 @State<UserWithToken>({
@@ -22,7 +23,7 @@ export class CurrentUserState {
   ): Observable<void> {
     const { user }: CurrentUserActions.Cache = actionPayload;
     context.setState(user);
-    return of(VOID);
+    return context.dispatch(new CurrentUserTokenActions.Cache(user?.token ?? null));
   }
 
   @Action(CurrentUserActions.SignIn)
@@ -32,7 +33,7 @@ export class CurrentUserState {
   ): Observable<void> {
     const { authInfo }: CurrentUserActions.SignIn = actionPayload;
     return this.authRequests.signIn(authInfo).pipe(
-      tap((userWithToken: UserWithToken) => context.setState(userWithToken)),
+      tap((userWithToken: UserWithToken) => context.dispatch(new CurrentUserActions.Cache(userWithToken))),
       mapTo(VOID)
     );
   }
@@ -44,7 +45,7 @@ export class CurrentUserState {
   ): Observable<void> {
     const { authInfo }: CurrentUserActions.SignUp = actionPayload;
     return this.authRequests.signUp(authInfo).pipe(
-      tap((userWithToken: UserWithToken) => context.setState(userWithToken)),
+      tap((userWithToken: UserWithToken) => context.dispatch(new CurrentUserActions.Cache(userWithToken))),
       mapTo(VOID)
     );
   }

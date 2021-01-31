@@ -39,7 +39,7 @@ export default class Api {
       const result = await this.storage.create('tokens', [{ login }]);
       return response.status(200).send({token: result.id, ...user});
     } catch (error) {
-      console.log(`signIn error`, error);
+      console.log(`signUp error`, error);
       return response.status(500).send(error);
     }
   }
@@ -57,7 +57,7 @@ export default class Api {
       const signedOutItem = tokens[0];
       return response.status(200).send({login: signedOutItem.login});
     } catch (error) {
-      console.log(`signIn error`, error);
+      console.log(`signOut error`, error);
       return response.status(500).send(error);
     }
   }
@@ -83,8 +83,10 @@ export default class Api {
       if (isEmpty(usersWithValidPassword)) {
         return response.status(400).send('Неправильный пароль');
       }
-      const result = await this.storage.create('tokens', [{ login }]);
-      return response.status(200).send({token: result.id, ...usersWithValidPassword[0]});
+      const user = usersWithValidPassword[0];
+      const results = await this.storage.create('tokens', [{ login }]);
+      const token = results[0];
+      return response.status(200).send({token: token.id, ...user});
     } catch (error) {
       console.log(`signIn error`, error);
       return response.status(500).send(error);
@@ -130,7 +132,9 @@ export default class Api {
         return response.status(400).send('Необходимо поле: entity');
       }
       const filter = request.body.filter;
-      const result = await this.storage.select(entity, filter);
+      const limit = request.body.limit < 0 ? null : request.body.limit;
+      const offset = request.body.offset < 0 ? null : request.body.offset;
+      const result = await this.storage.select(entity, filter, offset, limit);
       return response.status(200).send(result);
     } catch (error) {
       console.log(`select error`, error);

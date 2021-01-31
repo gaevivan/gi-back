@@ -44,7 +44,6 @@ export class SignUpPageComponent {
   }
 
   public signUp(): void {
-    console.log(this.authControl.value);
     this.store.dispatch(new CurrentUserActions.SignUp(this.authControl.value));
   }
 

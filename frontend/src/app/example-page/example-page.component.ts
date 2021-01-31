@@ -16,7 +16,7 @@ export class ExamplePageComponent implements OnInit {
 
   ngOnInit(): void {
     this.store.dispatch(new CurrentAppActions.Cache({ title: 'Test-App' }));
-    this.storageRequests.select().subscribe(console.log);
+    this.storageRequests.select().subscribe();
   }
 
   ngOnDestroy(): void {

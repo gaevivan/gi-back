@@ -10,7 +10,7 @@ const { MongoClient } = mongodb;
 
 MongoClient.connect('mongodb+srv://ghub-1-dbuser:Meph1stopheles@cluster0.iczte.mongodb.net/test?retryWrites=true&w=majority', { useUnifiedTopology: true })
   .then(client => {
-    console.log('Connected to Database');
+    console.log('Database: connected');
     const api = new Api(client);
     app.use(cors({ origin: true }));
     app.use(bodyParser.urlencoded({ extended: true }));
@@ -24,7 +24,8 @@ MongoClient.connect('mongodb+srv://ghub-1-dbuser:Meph1stopheles@cluster0.iczte.m
     app.post('/api/signIn', (request, response) => api.signIn(request, response));
     app.post('/api/signOut', api.checkToken, (request, response) => api.signOut(request, response));
     app.listen(3000, function () {
-      console.log('listening on 3000')
+      console.log('Port: 3000');
+      console.log('Server: started');
     });
   })
   .catch(() => client.close())

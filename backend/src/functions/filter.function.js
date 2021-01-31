@@ -1,5 +1,6 @@
 import compare from './compare.function.js';
 import { AND_OPERATOR, NO_OPERATOR, OR_OPERATOR } from '../constants.js';
+import isEmpty from './is-empty.function.js';
 
 export default function filterData(data, filter) {
   return data.filter((dataItem) => filterOne(dataItem, filter));

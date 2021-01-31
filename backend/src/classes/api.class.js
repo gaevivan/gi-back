@@ -8,6 +8,29 @@ export default class Api {
     this.storage = new Storage(database);
   }
 
+  async currentUser(request, response) {
+    try {
+      const token = request.headers.token;
+      if (!token) {
+        return response.status(401).send('Invalid token');
+      }
+      const tokens = await this.storage.select('tokens', getEqualFilter('id', token));
+      if (isEmpty(tokens)) {
+        return response.status(400).send('Invalid token');
+      }
+      const tokenItem = tokens[0];
+      const login = tokenItem.login;
+      const users = await this.storage.select('users', getEqualFilter('login', login));
+      if (isEmpty(users)) {
+        return response.status(400).send('Invalid token');
+      }
+      return response.status(200).send(users[0]);
+    } catch (error) {
+      console.log(`signOut error`, error);
+      return response.status(500).send(error);
+    }
+  }
+
   async checkToken(request, response, next) {
     try {
       const token = request.headers.token;

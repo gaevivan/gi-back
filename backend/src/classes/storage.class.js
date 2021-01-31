@@ -1,4 +1,4 @@
-import filter from '../functions/filter.function.js';
+import filterData from '../functions/filter.function.js';
 import getUuidV4 from '../functions/get-uuid-v4.function.js';
 import isNil from '../functions/is-nil.function.js';
 import isUuidV4 from '../functions/is-uuid-v4.function.js';
@@ -46,12 +46,12 @@ export default class Storage {
   }
 
   async select(
-    entity, filterItem, offset = null, limit = null
+    entity, filter = null, offset = null, limit = null
   ) {
     const collection = this.database.collection(entity);
     return collection.find({}, {projection: {"_id": 0}}).toArray()
       .then(result => {
-        const filtered = filter(result, filterItem);
+        const filtered = filterData(result, filter);
         const offseted = isNil(offset) ? filtered : filtered.slice(offset);
         const limited = isNil(limit) ? offseted : offseted.slice(0, limit);
         return limited;

@@ -1,19 +1,24 @@
 import compare from './compare.function.js';
-import { AND_OPERATOR, OR_OPERATOR } from '../constants.js';
+import { AND_OPERATOR, NO_OPERATOR, OR_OPERATOR } from '../constants.js';
 
-export default function filter(dataItemList, filterItem) {
-  return dataItemList.filter((dataItem) => filterOne(dataItem, filterItem));
+export default function filterData(data, filter) {
+  return data.filter((dataItem) => filterOne(dataItem, filter));
 }
 
-function filterOne(dataItem, filterItem) {
-  if (!filterItem) {
+function filterOne(dataItem, filter) {
+  if (isEmpty(filter) && filter.length === 1) {
     return true;
   }
-  if (filterItem.length > 2 && filterItem[1] === AND_OPERATOR) {
-    return filterOne(dataItem, filterItem[0]) && filterOne(dataItem, filterItem[2]);
-  } else if (filterItem.length > 2 && filterItem[1] === OR_OPERATOR) {
-    return filterOne(dataItem, filterItem[0]) || filterOne(dataItem, filterItem[2])
-  } else {
-    return compare(dataItem, filterItem);
+  if (filter[0] === OR_OPERATOR) {
+    const filterItemList = filter.slice(1);
+    return filterItemList.some((filterItem) => filterOne(dataItem, filterItem));
   }
+  if (filter[0] === AND_OPERATOR) {
+    const filterItemList = filter.slice(1);
+    return filterItemList.every((filterItem) => filterOne(dataItem, filterItem));
+  }
+  if (filter[0] === NO_OPERATOR) {
+    return !filterOne(dataItem, filter[1]);
+  }
+  return compare(dataItem, filter);
 }

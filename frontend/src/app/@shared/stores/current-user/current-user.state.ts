@@ -1,14 +1,17 @@
 import { Injectable } from '@angular/core';
 import { Action, State, StateContext } from '@ngxs/store';
 import { VOID } from '@shared/constants/void.constant';
+import { TokenObject } from '@shared/interfaces/token-object.interface';
 import { UserWithToken } from '@shared/interfaces/user-with-token.interface';
+import { User } from '@shared/interfaces/user.interface';
 import { AuthRequests } from '@shared/requests/auth.requests';
 import { Observable, of } from 'rxjs';
 import { mapTo, tap } from 'rxjs/operators';
-import { CurrentUserTokenActions } from '../current-user-token/current-user-token.actions';
 import { CurrentUserActions } from './current-user.actions';
 
-@State<UserWithToken>({
+type CurrentStateContext = StateContext<User>;
+
+@State<User>({
   name: 'CurrentUserState',
   defaults: null,
 })
@@ -18,46 +21,24 @@ export class CurrentUserState {
 
   @Action(CurrentUserActions.Cache)
   public cache(
-    context: StateContext<UserWithToken>,
+    context: CurrentStateContext,
     actionPayload: CurrentUserActions.Cache
   ): Observable<void> {
     const { user }: CurrentUserActions.Cache = actionPayload;
     context.setState(user);
-    return context.dispatch(new CurrentUserTokenActions.Cache(user?.token ?? null));
+    return of(VOID);
   }
 
-  @Action(CurrentUserActions.SignIn)
-  public signIn(
+  @Action(CurrentUserActions.GetCurrentUser)
+  public getCurrentUser(
     context: StateContext<UserWithToken>,
-    actionPayload: CurrentUserActions.SignIn
+    _actionPayload: CurrentUserActions.GetCurrentUser
   ): Observable<void> {
-    const { authInfo }: CurrentUserActions.SignIn = actionPayload;
-    return this.authRequests.signIn(authInfo).pipe(
-      tap((userWithToken: UserWithToken) => context.dispatch(new CurrentUserActions.Cache(userWithToken))),
+    return this.authRequests.getCurrentUser().pipe(
+      tap((user: User) =>
+        context.dispatch(new CurrentUserActions.Cache(user))
+      ),
       mapTo(VOID)
     );
-  }
-
-  @Action(CurrentUserActions.SignUp)
-  public signUp(
-    context: StateContext<UserWithToken>,
-    actionPayload: CurrentUserActions.SignUp
-  ): Observable<void> {
-    const { authInfo }: CurrentUserActions.SignUp = actionPayload;
-    return this.authRequests.signUp(authInfo).pipe(
-      tap((userWithToken: UserWithToken) => context.dispatch(new CurrentUserActions.Cache(userWithToken))),
-      mapTo(VOID)
-    );
-  }
-
-  @Action(CurrentUserActions.SignOut)
-  public signOut(
-    context: StateContext<UserWithToken>,
-    actionPayload: CurrentUserActions.SignOut
-  ): Observable<void> {
-    const { token }: CurrentUserActions.SignOut = actionPayload;
-    return this.authRequests
-      .signOut(token)
-      .pipe(tap(() => context.setState(null)));
   }
 }

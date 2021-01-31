@@ -1,6 +1,4 @@
-import { Uuid } from "../types/uuid.type";
+import { TokenObject } from "./token-object.interface";
 import { User } from "./user.interface";
 
-export interface UserWithToken extends User {
-  token: Uuid;
-}
+export interface UserWithToken extends User, TokenObject {}

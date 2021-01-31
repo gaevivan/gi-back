@@ -8,15 +8,15 @@ import {
 } from '@angular/router';
 import { Store } from '@ngxs/store';
 import { isNil } from '@shared/functions/is-nil.function';
-import { UserWithToken } from '@shared/interfaces/user-with-token.interface';
-import { CurrentUserState } from '@shared/stores/current-user/current-user.state';
+import { TokenObject } from '@shared/interfaces/token-object.interface';
+import { AuthState } from '@shared/stores/auth/auth.state';
 import { Observable } from 'rxjs';
 import { map, take } from 'rxjs/operators';
 
 @Injectable({ providedIn: 'root' })
 export class CanActiveService implements CanActivate {
-  private readonly currentUser$: Observable<UserWithToken> = this.store.select(
-    CurrentUserState
+  private readonly token$: Observable<TokenObject> = this.store.select(
+    AuthState
   );
 
   constructor(private readonly store: Store, private router: Router) {}
@@ -29,25 +29,25 @@ export class CanActiveService implements CanActivate {
     | Promise<boolean | UrlTree>
     | boolean
     | UrlTree {
-    return this.currentUser$.pipe(take(1)).pipe(
-      map((currentUser: UserWithToken) => {
-        const isAuthtorized: boolean = !isNil(currentUser);
+    return this.token$.pipe(take(1)).pipe(
+      map((tokenObject: TokenObject) => {
+        const isAuthorized: boolean = !isNil(tokenObject);
         const isAuthPages: boolean =
           state.url === '/sign-in' || state.url === '/sign-up';
 
-        if (isAuthPages && isAuthtorized) {
+        if (isAuthPages && isAuthorized) {
           this.router.navigate(['/']);
           return false;
         }
 
-        if (isAuthPages && !isAuthtorized) {
+        if (isAuthPages && !isAuthorized) {
           return true;
         }
-        if (!isAuthtorized) {
+        if (!isAuthorized) {
           this.router.navigateByUrl('/sign-in');
         }
 
-        return isAuthtorized;
+        return isAuthorized;
       })
     );
   }

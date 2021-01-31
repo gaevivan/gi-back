@@ -7,8 +7,7 @@ import {
 } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Store } from '@ngxs/store';
-import { CurrentUserActions } from '@shared/stores/current-user/current-user.actions';
-import { tap } from 'rxjs/operators';
+import { AuthActions } from '@shared/stores/auth/auth.actions';
 
 @Component({
   selector: 'app-sign-in-page',
@@ -39,8 +38,8 @@ export class SignInPageComponent {
   }
 
   public signIn(): void {
-    this.store.dispatch(new CurrentUserActions.SignIn(this.authControl.value)).pipe(
-      tap(() => this.router.navigateByUrl('/example'))
-    );
+    this.store
+      .dispatch(new AuthActions.SignIn(this.authControl.value))
+      .subscribe(() => this.router.navigateByUrl('/example'));
   }
 }

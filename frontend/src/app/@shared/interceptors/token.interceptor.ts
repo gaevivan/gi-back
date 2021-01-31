@@ -2,12 +2,13 @@ import {
   HttpEvent,
   HttpHandler,
   HttpInterceptor,
-  HttpRequest,
+  HttpRequest
 } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Store } from '@ngxs/store';
 import { isNil } from '@shared/functions/is-nil.function';
-import { CurrentUserTokenState } from '@shared/stores/current-user-token/current-user-token.state';
+import { TokenObject } from '@shared/interfaces/token-object.interface';
+import { AuthState } from '@shared/stores/auth/auth.state';
 import { Uuid } from '@shared/types/uuid.type';
 import { Observable } from 'rxjs';
 
@@ -19,14 +20,17 @@ export class TokenInterceptor implements HttpInterceptor {
     request: HttpRequest<unknown>,
     next: HttpHandler
   ): Observable<HttpEvent<unknown>> {
-    const token: Uuid = this.store.selectSnapshot<Uuid>(CurrentUserTokenState);
+    const tokenObject: TokenObject = this.store.selectSnapshot<TokenObject>(
+      AuthState
+    );
+    const token: Uuid = tokenObject?.token;
     if (isNil(token)) {
       return next.handle(request);
     }
 
     request = request.clone({
       setHeaders: {
-        Authorization: token,
+        token,
       },
     });
 

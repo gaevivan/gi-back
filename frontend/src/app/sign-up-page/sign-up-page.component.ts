@@ -6,8 +6,9 @@ import {
   ValidationErrors,
   Validators,
 } from '@angular/forms';
+import { Router } from '@angular/router';
 import { Store } from '@ngxs/store';
-import { CurrentUserActions } from '@shared/stores/current-user/current-user.actions';
+import { AuthActions } from '@shared/stores/auth/auth.actions';
 
 @Component({
   selector: 'app-sign-up-page',
@@ -30,7 +31,7 @@ export class SignUpPageComponent {
   ]);
   public readonly authControl: FormGroup = this.getDefaultForm();
 
-  constructor(private readonly store: Store) {
+  constructor(private readonly store: Store, private readonly router: Router) {
     this.authControl = this.getDefaultForm();
   }
 
@@ -44,7 +45,9 @@ export class SignUpPageComponent {
   }
 
   public signUp(): void {
-    this.store.dispatch(new CurrentUserActions.SignUp(this.authControl.value));
+    this.store
+      .dispatch(new AuthActions.SignUp(this.authControl.value))
+      .subscribe(() => this.router.navigateByUrl('/example'));
   }
 
   private samePass(control: AbstractControl): ValidationErrors | null {

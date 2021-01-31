@@ -1,3 +1,6 @@
+<ng-container *ngIf="isAuthorized$ | async">
+  <app-navigation-header></app-navigation-header>
+</ng-container>
 <div class="page">
   <router-outlet></router-outlet>
 </div>

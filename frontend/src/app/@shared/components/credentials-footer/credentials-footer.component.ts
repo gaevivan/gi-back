@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Store } from '@ngxs/store';
-import { App } from '@shared/interfaces/app.interface';
+import { Application } from '@shared/interfaces/app.interface';
 import { CurrentAppState } from '@shared/stores/current-app/current-app.state';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -18,6 +18,6 @@ export class CredentialsFooterComponent {
   private getCurrentTitle(): Observable<string> {
     return this.store
       .select(CurrentAppState)
-      .pipe(map((currentApp: App) => currentApp?.title ?? null));
+      .pipe(map((currentApp: Application) => currentApp?.title ?? null));
   }
 }

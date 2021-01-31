@@ -7,7 +7,7 @@ export default function filterData(data, filter) {
 }
 
 function filterOne(dataItem, filter) {
-  if (isEmpty(filter) && filter.length === 1) {
+  if (isEmpty(filter) || filter.length === 1) {
     return true;
   }
   if (filter[0] === OR_OPERATOR) {

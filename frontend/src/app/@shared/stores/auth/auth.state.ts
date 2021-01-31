@@ -6,6 +6,7 @@ import { UserWithToken } from '@shared/interfaces/user-with-token.interface';
 import { AuthRequests } from '@shared/requests/auth.requests';
 import { combineLatest, Observable, of } from 'rxjs';
 import { mapTo, tap } from 'rxjs/operators';
+import { CurrentUserActions } from '../current-user/current-user.actions';
 import { AuthActions } from './auth.actions';
 
 type CurrentStateContext = StateContext<TokenObject>;
@@ -34,6 +35,7 @@ export class AuthState {
     actionPayload: AuthActions.SignIn
   ): Observable<void> {
     const { authInfo }: AuthActions.SignIn = actionPayload;
+    context.dispatch(new CurrentUserActions.Cache(null));
     return this.authRequests.signIn(authInfo).pipe(
       tap((token: TokenObject) =>
         context.dispatch(new AuthActions.CacheToken(token))
@@ -48,6 +50,7 @@ export class AuthState {
     actionPayload: AuthActions.SignUp
   ): Observable<void> {
     const { authInfo }: AuthActions.SignUp = actionPayload;
+    context.dispatch(new CurrentUserActions.Cache(null));
     return this.authRequests.signUp(authInfo).pipe(
       tap((token: TokenObject) =>
         context.dispatch(new AuthActions.CacheToken(token))
@@ -64,6 +67,7 @@ export class AuthState {
     return combineLatest([
       this.authRequests.signOut(),
       context.dispatch(new AuthActions.CacheToken(null)),
+      context.dispatch(new CurrentUserActions.Cache(null)),
     ]).pipe(mapTo(VOID));
   }
 }

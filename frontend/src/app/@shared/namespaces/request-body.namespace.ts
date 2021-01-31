@@ -3,8 +3,7 @@ import { Filter } from '@shared/interfaces/filter.interface';
 
 export namespace RequestBody {
 
-  export interface Select {
-    entity: Entities;
+  export interface NoEntitySelect {
     filter?: Filter;
     fields?: string[];
     limit?: number;
@@ -12,19 +11,18 @@ export namespace RequestBody {
     expand?: number;
   }
 
-  export interface Create<T> {
-    entity: Entities;
+  export interface Select extends NoEntitySelect, Entity {}
+
+  export interface Create<T> extends Entity {
     data: T[];
   }
 
-  export interface Update<T> {
-    entity: Entities;
+  export interface Update<T> extends Entity {
     filter?: Filter;
     data: Partial<T>;
   }
 
-  export interface Delete {
-    entity: Entities;
+  export interface Delete extends Entity {
     filter?: Filter;
   }
 

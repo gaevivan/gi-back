@@ -1,1 +1,7 @@
-<div class="g">123</div>
+<div class="application-list">
+  <ng-container *ngFor="let app of applications$ | async">
+    <div class="application-list__item">
+      <label class="item__title">{{app.title}}</label>
+    </div>
+  </ng-container>
+</div>

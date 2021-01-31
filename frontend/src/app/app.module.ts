@@ -5,6 +5,7 @@ import { NgxsStoragePluginModule } from '@ngxs/storage-plugin';
 import { NgxsModule } from '@ngxs/store';
 import { TokenInterceptor } from '@shared/interceptors/token.interceptor';
 import { SharedModule } from '@shared/shared.module';
+import { ApplicationsState } from '@shared/stores/applications/applications.state';
 import { AuthState } from '@shared/stores/auth/auth.state';
 import { CurrentAppState } from '@shared/stores/current-app/current-app.state';
 import { CurrentUserState } from '@shared/stores/current-user/current-user.state';
@@ -24,7 +25,13 @@ import { SignUpPageModule } from './sign-up-page/sign-up-page.module';
     SignUpPageModule,
     ExamplePageModule,
     SharedModule,
-    NgxsModule.forRoot([CurrentAppState, AuthState, UsersState, CurrentUserState]),
+    NgxsModule.forRoot([
+      CurrentAppState,
+      AuthState,
+      UsersState,
+      CurrentUserState,
+      ApplicationsState,
+    ]),
     NgxsStoragePluginModule.forRoot({
       key: [AuthState],
     }),

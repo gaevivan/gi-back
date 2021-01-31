@@ -8,11 +8,7 @@ export namespace UsersActions {
   }
 
   export class SelectByIdList {
-    public static readonly type: string = '[UsersActions] Select';
+    public static readonly type: string = '[UsersActions] SelectByIdList';
     constructor(public readonly idList: Uuid[]) {}
-  }
-
-  export class GetCurrentUser {
-    public static readonly type: string = '[UsersActions] GetCurrentUser';
   }
 }

@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
 import { Action, State, StateContext } from '@ngxs/store';
 import { VOID } from '@shared/constants/void.constant';
-import { App } from '@shared/interfaces/app.interface';
+import { Application } from '@shared/interfaces/app.interface';
 import { Observable, of } from 'rxjs';
 import { CurrentAppActions } from './current-app.actions';
 
-@State<App>({
+@State<Application>({
   name: 'CurrentAppState',
   defaults: null,
 })
@@ -13,7 +13,7 @@ import { CurrentAppActions } from './current-app.actions';
 export class CurrentAppState {
   @Action(CurrentAppActions.Cache)
   public cache(
-    context: StateContext<App>,
+    context: StateContext<Application>,
     actionPayload: CurrentAppActions.Cache
   ): Observable<void> {
     const { app }: CurrentAppActions.Cache = actionPayload;

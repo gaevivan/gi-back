@@ -5,6 +5,7 @@ import { Entities } from '@shared/enums/entity.enum';
 import { isEmpty } from '@shared/functions/is-empty.function';
 import { File } from '@shared/interfaces/file.interface';
 import { Filter } from '@shared/interfaces/filter.interface';
+import { WithId } from '@shared/interfaces/with-field.interface';
 import { RequestBody } from '@shared/namespaces/request-body.namespace';
 import { StorageRequests } from '@shared/requests/storage.requests';
 import { Uuid } from '@shared/types/uuid.type';
@@ -59,9 +60,9 @@ export class FilesState {
       filter,
     };
     return this.storageRequests
-      .select<CurrentType>(body)
+      .select<WithId<CurrentType>>(body)
       .pipe(
-        switchMap((itemList: CurrentType[]) =>
+        switchMap((itemList: WithId<CurrentType>[]) =>
           context.dispatch(new FilesActions.Cache(itemList))
         )
       );
@@ -79,9 +80,9 @@ export class FilesState {
       filter: isEmpty(equalFilter) ? equalFilter : ['or', ...equalFilter],
     };
     return this.storageRequests
-      .select<CurrentType>(body)
+      .select<WithId<CurrentType>>(body)
       .pipe(
-        switchMap((itemList: CurrentType[]) =>
+        switchMap((itemList: WithId<CurrentType>[]) =>
           context.dispatch(new FilesActions.Cache(itemList))
         )
       );

@@ -5,10 +5,11 @@ import { SharedModule } from '@shared/shared.module';
 import { TasksPageComponent } from './tasks-page.component';
 import { TasksPageRoutingModule } from './tasks-page-routing.module';
 import { TasksPageService } from './tasks-page.service';
+import { MenuComponent } from '@shared/components/menu/menu.component';
 
 
 @NgModule({
-  declarations: [TasksPageComponent],
+  declarations: [TasksPageComponent, MenuComponent],
   imports: [
     CommonModule,
     SharedModule,

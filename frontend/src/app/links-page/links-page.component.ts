@@ -15,7 +15,7 @@ import { LinksPageService } from './links-page.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LinksPageComponent {
-  public readonly notesList$: Observable<Link[]> = this.linksPageService
+  public readonly linksList$: Observable<Link[]> = this.linksPageService
     .linksList$;
 
   constructor(private readonly linksPageService: LinksPageService) {}

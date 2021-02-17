@@ -3,9 +3,11 @@
   flex-direction: column;
   height: 100%;
   background-color: whitesmoke;
+  overflow: hidden;
 }
 
 .page {
   height: 100%;
   flex-grow: 1;
+  min-height: 0;
 }

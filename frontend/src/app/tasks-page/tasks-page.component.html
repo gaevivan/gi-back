@@ -1,7 +1,14 @@
-<div class="tasks__list">
-  <ng-container *ngFor="let task of tasksList$ | async">
-    <div class="tasks__item">
-      {{task.text}}
-    </div>
-  </ng-container>
+<div class="tasks__layout">
+  <div class="tasks__side">
+    <app-menu></app-menu>
+  </div>
+  <div class="tasks__list">
+    <ng-container *ngFor="let task of tasksList$ | async">
+      <div class="tasks__item">
+        <input type="checkbox">
+        <div class="tasks__item-text">{{task.text}}</div>
+      </div>
+    </ng-container>
+  </div>
+  <figure class="tasks__side"></figure>
 </div>

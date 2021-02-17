@@ -11,7 +11,7 @@ import { FilesPageService } from "./files-page.service";
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class FilesPageComponent {
-  public readonly notesList$: Observable<File[]> = this.filesPageService
+  public readonly filesList$: Observable<File[]> = this.filesPageService
     .filesList$;
 
   constructor(private readonly filesPageService: FilesPageService) {}

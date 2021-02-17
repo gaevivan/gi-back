@@ -1,0 +1,8 @@
+<div>Файлы</div>
+<div class="files__list">
+  <ng-container *ngFor="let file of filesList$ | async">
+    <div class="files__item">
+      {{file.name}}
+    </div>
+  </ng-container>
+</div>

@@ -5,12 +5,50 @@
 }
 
 .tasks {
+  &__layout {
+    display: flex;
+    justify-content: space-between;
+    height: 100%;
+    padding: 1rem;
+    box-sizing: border-box;
+  }
+  &__side {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-grow: 1;
+    flex-shrink: 1;
+  }
+  &__menu {
+    background-color: rgb(250, 250, 250);
+    box-shadow: 0px 0px 0.2rem 0 silver;
+    border-radius: 1px;
+    padding: 1rem;
+    box-sizing: border-box;
+  }
   &__list {
+    background-color: rgb(250, 250, 250);
+    box-shadow: 0px 0px 0.2rem 0 silver;
+    border-radius: 1px;
     display: flex;
     flex-direction: column;
+    margin: 0 auto;
+    width: 1024px;
+    padding: 1rem;
+    box-sizing: border-box;
+    overflow: auto;
   }
   &__item {
-    display: block;
+    display: flex;
+    border: 1px solid silver;
+    border-radius: 6px;
+    width: fit-content;
+    padding: 0.5rem;
+    box-sizing: border-box;
+  }
+  &__item-text {
+    padding-left: 1rem;
+    box-sizing: border-box;
   }
   &__item ~ &__item {
     margin-top: 1em;

@@ -5,12 +5,12 @@ import { Uuid } from '@shared/types/uuid.type';
 export namespace TasksActions {
   export class Create {
     public static readonly type: string = '[TasksActions] Create';
-    constructor(public readonly itemList: WithId<Task>[]) {}
+    constructor(public readonly itemList: Task[]) {}
   }
 
   export class Cache {
     public static readonly type: string = '[TasksActions] Cache';
-    constructor(public readonly itemList: Task[]) {}
+    constructor(public readonly itemList: WithId<Task>[]) {}
   }
 
   export class SelectMany {

@@ -22,6 +22,7 @@ import { NotesPageModule } from './notes-page/notes-page.module';
 import { SignInPageModule } from './sign-in-page/sign-in-page.module';
 import { SignUpPageModule } from './sign-up-page/sign-up-page.module';
 import { TasksPageModule } from './tasks-page/tasks-page.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [AppComponent],
@@ -49,6 +50,7 @@ import { TasksPageModule } from './tasks-page/tasks-page.module';
     NgxsStoragePluginModule.forRoot({
       key: [AuthState],
     }),
+    BrowserAnimationsModule,
   ],
   providers: [
     {

@@ -6,12 +6,12 @@ export namespace LinksActions {
 
   export class Create {
     public static readonly type: string = '[LinksActions] Create';
-    constructor(public readonly itemList: WithId<Link>[]) {}
+    constructor(public readonly itemList: Link[]) {}
   }
 
   export class Cache {
     public static readonly type: string = '[LinksActions] Cache';
-    constructor(public readonly itemList: Link[]) {}
+    constructor(public readonly itemList: WithId<Link>[]) {}
   }
 
   export class SelectMany {

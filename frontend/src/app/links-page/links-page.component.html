@@ -1,0 +1,8 @@
+<div>Ссылки</div>
+<div class="links__list">
+  <ng-container *ngFor="let link of linksList$ | async">
+    <div class="links__item">
+      {{link.name}}
+    </div>
+  </ng-container>
+</div>

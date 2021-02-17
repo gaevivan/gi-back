@@ -6,6 +6,7 @@ import { RouterModule } from '@angular/router';
 import { ErrorsMessagePipe } from '@shared/pipes/errors-message.pipe';
 import { CredentialsFooterComponent } from './components/credentials-footer/credentials-footer.component';
 import { NavigationHeaderComponent } from './components/navigation-header/navigation-header.component';
+import { MatIconModule } from '@angular/material/icon';
 
 const BASE_MODULES: Type<NgModule>[] = [
   CommonModule,
@@ -13,6 +14,7 @@ const BASE_MODULES: Type<NgModule>[] = [
   ReactiveFormsModule,
   HttpClientModule,
   RouterModule,
+  MatIconModule,
 ];
 
 const PIPES: Type<PipeTransform>[] = [ErrorsMessagePipe];

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 import { Store } from '@ngxs/store';
 import { isNil } from '@shared/functions/is-nil.function';
 import { TokenObject } from '@shared/interfaces/token-object.interface';
@@ -10,6 +10,8 @@ import { map } from 'rxjs/operators';
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
+  encapsulation: ViewEncapsulation.Emulated,
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AppComponent {
 

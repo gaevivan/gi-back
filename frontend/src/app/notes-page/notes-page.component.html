@@ -1,0 +1,7 @@
+<div class="notes__list">
+  <ng-container *ngFor="let note of notesList$ | async">
+    <div class="notes__item">
+      {{note.text}}
+    </div>
+  </ng-container>
+</div>

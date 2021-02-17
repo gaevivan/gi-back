@@ -1,9 +1,12 @@
 import { NgModule, Type } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { CanActiveService } from '@shared/services/can-activate.service';
-import { ExamplePageModule } from './example-page/example-page.module';
+import { FilesPageModule } from './files-page/files-page.module';
+import { LinksPageModule } from './links-page/links-page.module';
+import { NotesPageModule } from './notes-page/notes-page.module';
 import { SignInPageModule } from './sign-in-page/sign-in-page.module';
 import { SignUpPageModule } from './sign-up-page/sign-up-page.module';
+import { TasksPageModule } from './tasks-page/tasks-page.module';
 
 const routes: Routes = [
   {
@@ -24,10 +27,24 @@ const routes: Routes = [
       import('./sign-up-page/sign-up-page.module').then((module) => module.SignUpPageModule),
   },
   {
-    path: 'example',
-    canActivate: [CanActiveService],
-    loadChildren: (): Promise<Type<ExamplePageModule>> =>
-      import('./example-page/example-page.module').then((module) => module.ExamplePageModule),
+    path: 'tasks',
+    loadChildren: (): Promise<Type<TasksPageModule>> =>
+      import('./tasks-page/tasks-page.module').then((module) => module.TasksPageModule),
+  },
+  {
+    path: 'links',
+    loadChildren: (): Promise<Type<LinksPageModule>> =>
+      import('./links-page/links-page.module').then((module) => module.LinksPageModule),
+  },
+  {
+    path: 'files',
+    loadChildren: (): Promise<Type<FilesPageModule>> =>
+      import('./files-page/files-page.module').then((module) => module.FilesPageModule),
+  },
+  {
+    path: 'notes',
+    loadChildren: (): Promise<Type<NotesPageModule>> =>
+      import('./notes-page/notes-page.module').then((module) => module.NotesPageModule),
   }
 ];
 

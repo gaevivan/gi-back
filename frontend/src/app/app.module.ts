@@ -9,12 +9,19 @@ import { ApplicationsState } from '@shared/stores/applications/applications.stat
 import { AuthState } from '@shared/stores/auth/auth.state';
 import { CurrentAppState } from '@shared/stores/current-app/current-app.state';
 import { CurrentUserState } from '@shared/stores/current-user/current-user.state';
+import { FilesState } from '@shared/stores/files/files.state';
+import { LinksState } from '@shared/stores/links/links.state';
+import { NotesState } from '@shared/stores/notes/notes.state';
+import { TasksState } from '@shared/stores/tasks/tasks.state';
 import { UsersState } from '@shared/stores/users/users.state';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { ExamplePageModule } from './example-page/example-page.module';
+import { FilesPageModule } from './files-page/files-page.module';
+import { LinksPageModule } from './links-page/links-page.module';
+import { NotesPageModule } from './notes-page/notes-page.module';
 import { SignInPageModule } from './sign-in-page/sign-in-page.module';
 import { SignUpPageModule } from './sign-up-page/sign-up-page.module';
+import { TasksPageModule } from './tasks-page/tasks-page.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -23,7 +30,10 @@ import { SignUpPageModule } from './sign-up-page/sign-up-page.module';
     AppRoutingModule,
     SignInPageModule,
     SignUpPageModule,
-    ExamplePageModule,
+    TasksPageModule,
+    NotesPageModule,
+    LinksPageModule,
+    FilesPageModule,
     SharedModule,
     NgxsModule.forRoot([
       CurrentAppState,
@@ -31,6 +41,10 @@ import { SignUpPageModule } from './sign-up-page/sign-up-page.module';
       UsersState,
       CurrentUserState,
       ApplicationsState,
+      TasksState,
+      NotesState,
+      LinksState,
+      FilesState
     ]),
     NgxsStoragePluginModule.forRoot({
       key: [AuthState],

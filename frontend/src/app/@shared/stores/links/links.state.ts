@@ -7,6 +7,7 @@ import { Filter } from '@shared/interfaces/filter.interface';
 import { Link } from '@shared/interfaces/link.interface';
 import { RequestBody } from '@shared/namespaces/request-body.namespace';
 import { StorageRequests } from '@shared/requests/storage.requests';
+import { Uuid } from '@shared/types/uuid.type';
 import { Observable, of } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 import { LinksActions } from './links.actions';
@@ -29,6 +30,21 @@ export class LinksState {
     const { itemList }: LinksActions.Cache = actionPayload;
     context.setState(itemList);
     return of(VOID);
+  }
+
+  @Action(LinksActions.Create)
+  public create(
+    context: StateContext<CurrentType[]>,
+    actionPayload: LinksActions.Create
+  ): Observable<void> {
+    const { itemList }: LinksActions.Create = actionPayload;
+    const body: RequestBody.Create<CurrentType> = {
+      entity: Entities.links,
+      data: itemList
+    };
+    return this.storageRequests.create<CurrentType>(body).pipe(
+      switchMap((idList: Uuid[]) => context.dispatch(new LinksActions.SelectMany(idList)))
+    );
   }
 
   @Action(LinksActions.SelectMany)

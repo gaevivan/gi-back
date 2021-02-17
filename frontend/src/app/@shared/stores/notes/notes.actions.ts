@@ -1,7 +1,13 @@
 import { Note } from '@shared/interfaces/note.interface';
+import { WithId } from '@shared/interfaces/with-field.interface';
 import { Uuid } from '@shared/types/uuid.type';
 
 export namespace NotesActions {
+  export class Create {
+    public static readonly type: string = '[NotesActions] Create';
+    constructor(public readonly itemList: WithId<Note>[]) {}
+  }
+
   export class Cache {
     public static readonly type: string = '[NotesActions] Cache';
     constructor(public readonly itemList: Note[]) {}

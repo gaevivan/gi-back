@@ -3,6 +3,9 @@ import {
   Component,
   ViewEncapsulation,
 } from '@angular/core';
+import { Link } from '@shared/interfaces/link.interface';
+import { Observable } from 'rxjs';
+import { LinksPageService } from './links-page.service';
 
 @Component({
   selector: 'app-links-page',
@@ -11,4 +14,9 @@ import {
   encapsulation: ViewEncapsulation.Emulated,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class LinksPageComponent {}
+export class LinksPageComponent {
+  public readonly notesList$: Observable<Link[]> = this.linksPageService
+    .linksList$;
+
+  constructor(private readonly linksPageService: LinksPageService) {}
+}

@@ -7,6 +7,7 @@ import { File } from '@shared/interfaces/file.interface';
 import { Filter } from '@shared/interfaces/filter.interface';
 import { RequestBody } from '@shared/namespaces/request-body.namespace';
 import { StorageRequests } from '@shared/requests/storage.requests';
+import { Uuid } from '@shared/types/uuid.type';
 import { Observable, of } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 import { FilesActions } from './files.actions';
@@ -31,8 +32,43 @@ export class FilesState {
     return of(VOID);
   }
 
+  @Action(FilesActions.Create)
+  public create(
+    context: StateContext<CurrentType[]>,
+    actionPayload: FilesActions.Create
+  ): Observable<void> {
+    const { itemList }: FilesActions.Create = actionPayload;
+    const body: RequestBody.Create<CurrentType> = {
+      entity: Entities.files,
+      data: itemList
+    };
+    return this.storageRequests.create<CurrentType>(body).pipe(
+      switchMap((idList: Uuid[]) => context.dispatch(new FilesActions.SelectMany(idList)))
+    );
+  }
+
+  @Action(FilesActions.SelectOne)
+  public selectOne(
+    context: StateContext<CurrentType[]>,
+    actionPayload: FilesActions.SelectOne
+  ): Observable<void> {
+    const { id }: FilesActions.SelectOne = actionPayload;
+    const filter: Filter = ['id', '=', id];
+    const body: RequestBody.Select = {
+      entity: Entities.files,
+      filter,
+    };
+    return this.storageRequests
+      .select<CurrentType>(body)
+      .pipe(
+        switchMap((itemList: CurrentType[]) =>
+          context.dispatch(new FilesActions.Cache(itemList))
+        )
+      );
+  }
+
   @Action(FilesActions.SelectMany)
-  public select(
+  public selectMany(
     context: StateContext<CurrentType[]>,
     actionPayload: FilesActions.SelectMany
   ): Observable<void> {

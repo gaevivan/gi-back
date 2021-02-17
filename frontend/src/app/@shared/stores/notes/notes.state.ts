@@ -7,6 +7,7 @@ import { Filter } from '@shared/interfaces/filter.interface';
 import { Note } from '@shared/interfaces/note.interface';
 import { RequestBody } from '@shared/namespaces/request-body.namespace';
 import { StorageRequests } from '@shared/requests/storage.requests';
+import { Uuid } from '@shared/types/uuid.type';
 import { Observable, of } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 import { NotesActions } from './notes.actions';
@@ -29,6 +30,21 @@ export class NotesState {
     const { itemList }: NotesActions.Cache = actionPayload;
     context.setState(itemList);
     return of(VOID);
+  }
+
+  @Action(NotesActions.Create)
+  public create(
+    context: StateContext<CurrentType[]>,
+    actionPayload: NotesActions.Create
+  ): Observable<void> {
+    const { itemList }: NotesActions.Create = actionPayload;
+    const body: RequestBody.Create<CurrentType> = {
+      entity: Entities.notes,
+      data: itemList
+    };
+    return this.storageRequests.create<CurrentType>(body).pipe(
+      switchMap((idList: Uuid[]) => context.dispatch(new NotesActions.SelectMany(idList)))
+    );
   }
 
   @Action(NotesActions.SelectMany)

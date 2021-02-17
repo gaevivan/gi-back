@@ -5,6 +5,7 @@ import { VOID } from '@shared/constants/void.constant';
 import { Entities } from '@shared/enums/entity.enum';
 import { Entity } from '@shared/interfaces/entity.inteface';
 import { RequestBody } from '@shared/namespaces/request-body.namespace';
+import { Uuid } from '@shared/types/uuid.type';
 import { Observable } from 'rxjs';
 import { mapTo } from 'rxjs/operators';
 
@@ -20,8 +21,8 @@ export class StorageRequests {
     return this.http.post<T[]>(`${API_URL}/select`, body);
   }
 
-  public create<T>(body: RequestBody.Create<T>): Observable<void> {
-    return this.http.post(`${API_URL}/create`, body).pipe(mapTo(VOID));
+  public create<T>(body: RequestBody.Create<T>): Observable<Uuid[]> {
+    return this.http.post<Uuid[]>(`${API_URL}/create`, body);
   }
 
   public update<T>(body: RequestBody.Update<T>): Observable<any> {

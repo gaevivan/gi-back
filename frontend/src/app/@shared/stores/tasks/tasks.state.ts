@@ -7,6 +7,7 @@ import { Filter } from '@shared/interfaces/filter.interface';
 import { Task } from '@shared/interfaces/task.interface';
 import { RequestBody } from '@shared/namespaces/request-body.namespace';
 import { StorageRequests } from '@shared/requests/storage.requests';
+import { Uuid } from '@shared/types/uuid.type';
 import { Observable, of } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 import { TasksActions } from './tasks.actions';
@@ -29,6 +30,21 @@ export class TasksState {
     const { itemList }: TasksActions.Cache = actionPayload;
     context.setState(itemList);
     return of(VOID);
+  }
+
+  @Action(TasksActions.Create)
+  public create(
+    context: StateContext<CurrentType[]>,
+    actionPayload: TasksActions.Create
+  ): Observable<void> {
+    const { itemList }: TasksActions.Create = actionPayload;
+    const body: RequestBody.Create<CurrentType> = {
+      entity: Entities.tasks,
+      data: itemList
+    };
+    return this.storageRequests.create<CurrentType>(body).pipe(
+      switchMap((idList: Uuid[]) => context.dispatch(new TasksActions.SelectMany(idList)))
+    );
   }
 
   @Action(TasksActions.SelectMany)

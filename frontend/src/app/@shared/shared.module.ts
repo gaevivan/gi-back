@@ -7,6 +7,7 @@ import { ErrorsMessagePipe } from '@shared/pipes/errors-message.pipe';
 import { CredentialsFooterComponent } from './components/credentials-footer/credentials-footer.component';
 import { NavigationHeaderComponent } from './components/navigation-header/navigation-header.component';
 import { MatIconModule } from '@angular/material/icon';
+import { MenuComponent } from './components/menu/menu.component';
 
 const BASE_MODULES: Type<NgModule>[] = [
   CommonModule,
@@ -22,6 +23,7 @@ const PIPES: Type<PipeTransform>[] = [ErrorsMessagePipe];
 const COMPONENTS: Type<any>[] = [
   CredentialsFooterComponent,
   NavigationHeaderComponent,
+  MenuComponent
 ];
 
 const INTERCEPTORS: Type<HttpInterceptor>[] = [

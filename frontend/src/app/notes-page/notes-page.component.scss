@@ -5,14 +5,49 @@
 }
 
 .notes {
-  &__list {
+  &__layout {
     display: flex;
-    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+    padding: 1rem;
+    box-sizing: border-box;
+  }
+  &__side {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-grow: 1;
+    flex-shrink: 1;
+  }
+  &__menu {
+    background-color: rgb(250, 250, 250);
+    box-shadow: 0px 0px 0.2rem 0 silver;
+    border-radius: 1px;
+    padding: 1rem;
+    box-sizing: border-box;
+  }
+  &__list {
+    background-color: rgb(250, 250, 250);
+    box-shadow: 0px 0px 0.2rem 0 silver;
+    border-radius: 1px;
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 auto;
+    width: 1024px;
+    padding: 1rem;
+    box-sizing: border-box;
+    overflow: auto;
   }
   &__item {
-    display: block;
-  }
-  &__item ~ &__item {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid silver;
+    border-radius: 6px;
+    width: fit-content;
+    height: fit-content;
+    padding: 0.5rem;
+    box-sizing: border-box;
     margin-top: 1em;
+    margin-left: 1em;
   }
 }

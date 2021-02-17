@@ -1,8 +1,11 @@
 import { Component } from '@angular/core';
+import { Pages } from '@shared/enums/pages.enum';
+import { NavigationService } from '@shared/services/navigation.service';
 
 interface MenuItem {
   text: string;
   icon: string;
+  url: string;
 }
 
 @Component({
@@ -12,9 +15,15 @@ interface MenuItem {
 })
 export class MenuComponent {
   public readonly menuList: MenuItem[] = [
-    {text: "Задачи", icon: "task_alt"},
-    {text: "Ссылки", icon: "link"},
-    {text: "Заметки", icon: "sticky_note_2"},
-    {text: "Файлы", icon: "folder"},
+    {text: "Задачи", icon: "task_alt", url: `/${Pages.tasks}`},
+    {text: "Ссылки", icon: "link", url: `/${Pages.links}`},
+    {text: "Заметки", icon: "sticky_note_2", url: `/${Pages.notes}`},
+    {text: "Файлы", icon: "folder", url: `/${Pages.files}`},
   ];
+
+  constructor(private readonly navigationService: NavigationService) {}
+
+  public navigate(route: string): void {
+    this.navigationService.goToRoute(route);
+  }
 }

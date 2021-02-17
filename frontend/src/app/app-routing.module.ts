@@ -1,5 +1,6 @@
 import { NgModule, Type } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { Pages } from '@shared/enums/pages.enum';
 import { CanActiveService } from '@shared/services/can-activate.service';
 import { FilesPageModule } from './files-page/files-page.module';
 import { LinksPageModule } from './links-page/links-page.module';
@@ -12,37 +13,37 @@ const routes: Routes = [
   {
     path: '',
     pathMatch: 'full',
-    redirectTo: 'tasks'
+    redirectTo: Pages.tasks
   },
   {
-    path: 'sign-in',
+    path: Pages.signIn,
     canActivate: [CanActiveService],
     loadChildren: (): Promise<Type<SignInPageModule>> =>
       import('./sign-in-page/sign-in-page.module').then((module) => module.SignInPageModule),
   },
   {
-    path: 'sign-up',
+    path: Pages.signUp,
     canActivate: [CanActiveService],
     loadChildren: (): Promise<Type<SignUpPageModule>> =>
       import('./sign-up-page/sign-up-page.module').then((module) => module.SignUpPageModule),
   },
   {
-    path: 'tasks',
+    path: Pages.tasks,
     loadChildren: (): Promise<Type<TasksPageModule>> =>
       import('./tasks-page/tasks-page.module').then((module) => module.TasksPageModule),
   },
   {
-    path: 'links',
+    path: Pages.links,
     loadChildren: (): Promise<Type<LinksPageModule>> =>
       import('./links-page/links-page.module').then((module) => module.LinksPageModule),
   },
   {
-    path: 'files',
+    path: Pages.files,
     loadChildren: (): Promise<Type<FilesPageModule>> =>
       import('./files-page/files-page.module').then((module) => module.FilesPageModule),
   },
   {
-    path: 'notes',
+    path: Pages.notes,
     loadChildren: (): Promise<Type<NotesPageModule>> =>
       import('./notes-page/notes-page.module').then((module) => module.NotesPageModule),
   }

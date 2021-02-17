@@ -17,7 +17,18 @@ type CurrentType = Note;
 
 @State<CurrentType[]>({
   name: 'NotesState',
-  defaults: null,
+  defaults: [
+    {
+      name: 'name 1',
+      text: 'text 1'
+    }, {
+      name: 'name 1',
+      text: 'text 1'
+    }, {
+      name: 'name 1',
+      text: 'text 1'
+    }
+  ],
 })
 @Injectable()
 export class NotesState {

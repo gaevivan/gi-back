@@ -1,8 +1,14 @@
-<div>Заметки</div>
-<div class="notes__list">
-  <ng-container *ngFor="let note of notesList$ | async">
-    <div class="notes__item">
-      {{note.text}}
-    </div>
-  </ng-container>
+<div class="notes__layout">
+  <div class="notes__side">
+    <app-menu></app-menu>
+  </div>
+  <div class="notes__list">
+    <ng-container *ngFor="let note of notesList$ | async">
+      <div class="notes__item">
+        <div>{{note.name}}</div>
+        <div>{{note.text}}</div>
+      </div>
+    </ng-container>
+  </div>
+  <figure class="notes__side"></figure>
 </div>

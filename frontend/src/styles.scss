@@ -8,21 +8,7 @@ body {
   font-size: 12pt;
 }
 
-input {
-  outline: none;
-  border: 1px solid silver;
-  font-family: 'Courier New', Courier, monospace;
-  font-size: 10pt;
-}
 
-input.ng-invalid.ng-dirty {
-  border-color: red !important;
-}
-
-button {
-  font-family: 'Courier New', Courier, monospace;
-  font-size: 12pt;
-}
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

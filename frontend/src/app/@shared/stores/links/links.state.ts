@@ -17,7 +17,21 @@ type CurrentType = Link;
 
 @State<CurrentType[]>({
   name: 'LinksState',
-  defaults: null,
+  defaults: [
+    {
+      name: 'yandex',
+      url: 'http://yandex.ru'
+    }, {
+      name: 'google1111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111',
+      url: 'https://www.google.com'
+    }, {
+      name: 'kg',
+      url: 'kg-portal.ru'
+    }, {
+      name: 'kinopoisk',
+      url: 'kinopoisk.ru'
+    }
+  ],
 })
 @Injectable()
 export class LinksState {

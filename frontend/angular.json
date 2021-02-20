@@ -33,6 +33,7 @@
               "src/assets"
             ],
             "styles": [
+              "src/assets/cartoon.scss",
               "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
               "src/styles.scss"
             ],

@@ -1,0 +1,85 @@
+@use "sass:color";
+
+:root {
+  --red: rgb(200, 40, 30, .8);
+  --blue: rgb(40, 80, 160, .8);
+  --green: rgba(10, 130, 20, 0.8);
+}
+
+body {
+  font-family: 'Courier New', Courier, monospace !important;
+}
+
+input {
+  --color: var(--blue);
+  outline: none;
+  border: 2px solid transparent;
+  border-bottom-color: var(--color);
+  border-top-width: 0;
+  border-left-width: 0;
+  border-right-width: 0;
+  padding: 4px;
+  padding-bottom: 2px;
+  color: var(--color);
+  border-radius: 0;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 12pt;
+  background-color: transparent;
+  transition: border-color 0.5s ease;
+  margin: 1px;
+}
+input:hover {
+  border-color: var(--color);
+  border-width: 2px;
+  padding: 2px;
+}
+input:focus {
+  border-color: var(--color);
+  border-width: 2px;
+  padding: 2px;
+}
+
+input.ng-invalid.ng-dirty {
+  border-color: red !important;
+}
+
+button {
+  --color: var(--blue);
+  font-family: 'Courier New', Courier, monospace;
+  color: var(--color);
+  border: 2px solid var(--color);
+  border-top-width: 0;
+  border-left-width: 0;
+  border-right-width: 0;
+  background-color: transparent;
+	text-transform: uppercase; 
+
+  margin: 1px;
+  outline: none;
+  cursor: pointer;
+  vertical-align: baseline;
+  font-weight: bolder;
+  font-size: 10pt;
+  padding: 6px;
+  padding-bottom: 3px;
+  transition: all 0.8s ease;
+}
+button:hover {
+  color: white;
+  background-color: var(--color);
+  border-color: transparent;
+  border-radius: 2px;
+}
+button:active {
+  transform: scale(0.95);
+}
+
+.blue {
+  --color: var(--blue);
+}
+.red {
+  --color: var(--red);
+}
+.green {
+  --color: var(--green);
+}

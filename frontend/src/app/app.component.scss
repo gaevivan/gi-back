@@ -3,7 +3,9 @@
   flex-direction: column;
   height: 100%;
   background-color: whitesmoke;
-  overflow: hidden;
+  overflow-y: hidden;
+  min-width: 1024px;
+  min-height: 800px;
 }
 
 .page {

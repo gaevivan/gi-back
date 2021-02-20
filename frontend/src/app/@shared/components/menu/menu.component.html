@@ -1,6 +1,6 @@
 <ng-container *ngFor="let item of menuList">
-  <div class="menu__item" (click)="navigate(item.url)">
-    <mat-icon aria-hidden="false" aria-label="Example home icon">{{item.icon}}</mat-icon>
+  <button class="menu__item" (click)="navigate(item.url)">
+    <mat-icon>{{item.icon}}</mat-icon>
     <div>{{item.text}}</div>
-  </div>
+  </button>
 </ng-container>

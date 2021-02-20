@@ -4,17 +4,17 @@
   border-radius: 1px;
   padding: 1rem;
   box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
 }
 
 .menu {
   &__item {
-    padding: 1rem;
     box-sizing: border-box;
     cursor: pointer;
     text-align: center;
   }
-  &__item:hover {
-    color: darkblue;
-    text-decoration: underline;
+  &__item ~ &__item {
+    margin-top: 2rem;
   }
 }

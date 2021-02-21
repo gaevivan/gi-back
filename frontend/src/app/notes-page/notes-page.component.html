@@ -1,14 +1,19 @@
-<div class="notes__layout">
-  <div class="notes__side">
+<div class="page">
+  <div class="row">
     <app-menu></app-menu>
+    <app-account-menu></app-account-menu>
   </div>
-  <div class="notes__list">
-    <ng-container *ngFor="let note of notesList$ | async">
-      <div class="notes__item">
-        <div>{{note.name}}</div>
-        <div>{{note.text}}</div>
-      </div>
-    </ng-container>
+  <div class="content">
+    <div class="notes__list layer">
+      <ng-container *ngFor="let note of notesList$ | async">
+        <div class="notes__item">
+          <div>{{note.name}}</div>
+          <div>{{note.text}}</div>
+        </div>
+      </ng-container>
+    </div>
   </div>
-  <figure class="notes__side"></figure>
+  <div class="row">
+    <app-credentials-footer></app-credentials-footer>
+  </div>
 </div>

@@ -1,8 +1,21 @@
-<div>Файлы</div>
-<div class="files__list">
-  <ng-container *ngFor="let file of filesList$ | async">
-    <div class="files__item">
-      {{file.name}}
+<div class="page">
+  <div class="row">
+    <app-menu></app-menu>
+    <app-account-menu></app-account-menu>
+  </div>
+  <div class="content">
+    <div class="files__list layer">
+      <ng-container *ngIf="isEmptyFilesList$ | async">
+        <h1 class="files__no-items-placeholder">Нет файлов</h1>
+      </ng-container>
+      <ng-container *ngFor="let file of filesList$ | async">
+        <div class="files__item">
+          {{file.name}}
+        </div>
+      </ng-container>
     </div>
-  </ng-container>
+  </div>
+  <div class="row">
+    <app-credentials-footer></app-credentials-footer>
+  </div>
 </div>

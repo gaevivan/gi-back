@@ -8,6 +8,15 @@
   &__list {
     display: flex;
     flex-direction: column;
+    height: 100%;
+  }
+  &__no-items-placeholder {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    flex-grow: 1;
+    align-items: center;
+    font-family: 'Courier New', Courier, monospace;
   }
   &__item {
     display: block;

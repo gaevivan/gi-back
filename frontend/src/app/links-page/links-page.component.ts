@@ -20,7 +20,7 @@ export class LinksPageComponent {
   public readonly searchControl: FormControl = new FormControl('');
   public readonly linksList$: Observable<Link[]> = this.getLinksList();
   public readonly isEmptyLinksList$: Observable<boolean> = this.linksList$.pipe(
-    map((linkList: Link[]) => linkList.length === 0)
+    map((linksList: Link[]) => linksList === null || linksList.length === 0)
   );
 
   constructor(private readonly linksPageService: LinksPageService) {}

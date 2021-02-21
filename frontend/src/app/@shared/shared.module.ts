@@ -9,6 +9,7 @@ import { NavigationHeaderComponent } from './components/navigation-header/naviga
 import { MatIconModule } from '@angular/material/icon';
 import { MenuComponent } from './components/menu/menu.component';
 import { AddHttpPipe } from './pipes/add-http.pipe';
+import { AccountMenuComponent } from './components/account-menu/account-menu.component';
 
 const BASE_MODULES: Type<NgModule>[] = [
   CommonModule,
@@ -24,7 +25,8 @@ const PIPES: Type<PipeTransform>[] = [ErrorsMessagePipe, AddHttpPipe];
 const COMPONENTS: Type<any>[] = [
   CredentialsFooterComponent,
   NavigationHeaderComponent,
-  MenuComponent
+  MenuComponent,
+  AccountMenuComponent
 ];
 
 const INTERCEPTORS: Type<HttpInterceptor>[] = [

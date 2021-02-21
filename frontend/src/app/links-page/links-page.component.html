@@ -1,42 +1,47 @@
-<div class="links__layout">
-  <div class="links__side">
+<div class="page">
+  <div class="row">
     <app-menu></app-menu>
+    <app-account-menu></app-account-menu>
   </div>
-  <div class="links__body">
-    <div class="links__body-toolbar">
-      <input
-        class="links__search-input"
-        type="text"
-        placeholder="Поиск..."
-        [formControl]="searchControl"
-      />
-      <button class="links__add-button">
-        <mat-icon>add_link</mat-icon>
-        <div>Новая ссылка</div>
-      </button>
-    </div>
-    <div class="links__list">
-      <ng-container *ngIf="isEmptyLinksList$ | async">
-        <h1 class="links__no-items-placeholder">Нет ссылок</h1>
-      </ng-container>
-      <ng-container *ngFor="let link of linksList$ | async">
-        <div class="links__item">
-          <input type="checkbox" (click)="$event.stopPropagation()">
-          <img
-            class="links__item-icon"
-            rel="icon"
-            src="{{ link.url | addHttp }}/favicon.ico"
-          />
-          <div class="links__item-name">{{ link.name }}</div>
-          <a class="links__item-url" [href]="link.url | addHttp">{{
-            link.url
-          }}</a>
-          <button class="links__delete-button red">
-            <mat-icon [inline]="true">close</mat-icon>
-          </button>
-        </div>
-      </ng-container>
+  <div class="content">
+    <div class="links__body layer">
+      <div class="links__body-toolbar">
+        <input
+          class="links__search-input"
+          type="text"
+          placeholder="Поиск..."
+          [formControl]="searchControl"
+        />
+        <button class="links__add-button">
+          <mat-icon>add_link</mat-icon>
+          <div>Новая ссылка</div>
+        </button>
+      </div>
+      <div class="links__list">
+        <ng-container *ngIf="isEmptyLinksList$ | async">
+          <h1 class="links__no-items-placeholder">Нет ссылок</h1>
+        </ng-container>
+        <ng-container *ngFor="let link of linksList$ | async">
+          <div class="links__item">
+            <input type="checkbox" (click)="$event.stopPropagation()">
+            <img
+              class="links__item-icon"
+              rel="icon"
+              src="{{ link.url | addHttp }}/favicon.ico"
+            />
+            <div class="links__item-name">{{ link.name }}</div>
+            <a class="links__item-url" [href]="link.url | addHttp">{{
+              link.url
+            }}</a>
+            <button class="links__delete-button red" title="Удалить">
+              <mat-icon [inline]="true">close</mat-icon>
+            </button>
+          </div>
+        </ng-container>
+      </div>
     </div>
   </div>
-  <figure class="links__side"></figure>
+  <div class="row">
+    <app-credentials-footer></app-credentials-footer>
+  </div>
 </div>
